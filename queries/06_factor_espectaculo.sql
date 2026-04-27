@@ -68,33 +68,3 @@ ORDER BY goles_por_partido DESC
 LIMIT 10;
 
 
--- ============================================================
--- CONTRAPARTIDA (descomentar para ejecutar)
--- ============================================================
--- Top 10 equipos más ABURRIDOS (menos goles por partido)
--- ============================================================
-/*
-WITH partidos_por_equipo AS (
-    SELECT home_team_api_id AS team_api_id, league_id,
-           home_team_goal + away_team_goal AS goles_partido
-    FROM match
-    UNION ALL
-    SELECT away_team_api_id AS team_api_id, league_id,
-           home_team_goal + away_team_goal AS goles_partido
-    FROM match
-)
-SELECT
-    t.team_long_name AS equipo,
-    l.name           AS liga,
-    COUNT(*)         AS partidos,
-    ROUND(AVG(p.goles_partido)::numeric, 2) AS goles_por_partido,
-    ROUND(100.0 * COUNT(*) FILTER (WHERE p.goles_partido = 0) / COUNT(*), 1) AS pct_0_0,
-    ROUND(100.0 * COUNT(*) FILTER (WHERE p.goles_partido <= 2) / COUNT(*), 1) AS pct_under_2_5
-FROM partidos_por_equipo p
-JOIN team   t ON t.team_api_id = p.team_api_id
-JOIN league l ON l.id          = p.league_id
-GROUP BY t.team_long_name, l.name
-HAVING COUNT(*) >= 150
-ORDER BY goles_por_partido ASC
-LIMIT 10;
-*/
