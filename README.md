@@ -115,7 +115,7 @@ Pivote manual de formato largo a ancho con `MAX(CASE WHEN player_name ILIKE '%me
 ### Nivel 5 — Análisis temporal avanzado
 
 **Q14 · Evolución táctica: el ADN de los grandes equipos**
-Combina `LAG()` para comparar cada año con el anterior, y `AVG() OVER (PARTITION BY team)` sin `ORDER BY` para obtener la media histórica del equipo en la misma fila. Detecta cambios tácticos bruscos (≥15 puntos en velocidad o presión) que suelen coincidir con cambios de entrenador. Técnica transferible a cualquier dominio temporal: finanzas (crecimiento YoY), producto (cohortes), IoT (deltas entre lecturas).
+Combina `LAG()` para comparar cada año con el anterior, y `AVG() OVER (PARTITION BY team)` sin `ORDER BY` para obtener la media histórica del equipo en la misma fila. Permite identificar el ADN táctico persistente de cada club (Barça baja velocidad + alta presión = tiki-taka) y los años de cambio de filosofía asociados a cambios de entrenador. Técnica transferible a cualquier dominio temporal: finanzas (crecimiento YoY), producto (cohortes), IoT (deltas entre lecturas).
 
 ---
 
@@ -129,9 +129,6 @@ De los 16 Barça–Madrid del dataset: 10 victorias para Barça, 4 para Real Mad
 
 **Compra qatarí del PSG detectable en datos tácticos**
 Entre 2010 y 2011 (año de la compra por QSI), la presión del PSG baja 25 puntos. El cambio de dueño cambia el estilo de juego antes incluso que la plantilla.
-
-**Cambio de estilo más extremo del dataset: Arsenal 2012**
-La velocidad de construcción cae 50 puntos en un año (de 75 a 25). Wenger experimentando con un giro radical al tiki-taka, que abandonaría dos años después (+29 puntos de velocidad en 2014).
 
 **Pep Guardiola en su versión más extrema**
 Última temporada de Pep en el Barça (2012): la velocidad de construcción toca fondo con 24 puntos — el tiki-taka llevado al límite físico. Después se va, y el Barça nunca volvió a ese nivel de extremismo estilístico.
