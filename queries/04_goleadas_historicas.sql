@@ -52,31 +52,3 @@ ORDER BY diferencia DESC, goles_totales DESC
 LIMIT 15;
 
 
--- ============================================================
--- QUERY ALTERNATIVA (descomentar para ejecutar)
--- ============================================================
--- Ranking de equipos que MÁS goleadas RECIBIERON (≥ 4 goles
--- de diferencia). Las humillaciones más repetidas de Europa.
--- ============================================================
-/*
-WITH goleadas AS (
-    SELECT
-        CASE
-            WHEN home_team_goal > away_team_goal THEN away_team_api_id
-            ELSE home_team_api_id
-        END AS victima_api_id
-    FROM match
-    WHERE ABS(home_team_goal - away_team_goal) >= 4
-)
-SELECT
-    t.team_long_name                         AS victima,
-    l.name                                   AS liga,
-    COUNT(*)                                 AS veces_humillado
-FROM goleadas g
-JOIN team   t ON t.team_api_id = g.victima_api_id
-JOIN match  m ON m.home_team_api_id = g.victima_api_id OR m.away_team_api_id = g.victima_api_id
-JOIN league l ON l.id = m.league_id
-GROUP BY t.team_long_name, l.name
-ORDER BY veces_humillado DESC
-LIMIT 10;
-*/
