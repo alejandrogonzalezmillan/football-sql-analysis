@@ -75,36 +75,5 @@ FROM clasicos
 ORDER BY fecha;
 
 
--- ============================================================
--- BALANCE HISTÓRICO (descomentar para ejecutar aparte)
--- ============================================================
--- KPIs globales: victorias, empates, goles, promedios.
--- ============================================================
-/*
-WITH clasicos AS (
-    SELECT
-        m.home_team_goal, m.away_team_goal,
-        home.team_long_name AS local,
-        away.team_long_name AS visitante,
-        CASE
-            WHEN m.home_team_goal > m.away_team_goal THEN home.team_long_name
-            WHEN m.home_team_goal < m.away_team_goal THEN away.team_long_name
-            ELSE 'Empate'
-        END AS ganador
-    FROM match m
-    JOIN team home ON home.team_api_id = m.home_team_api_id
-    JOIN team away ON away.team_api_id = m.away_team_api_id
-    WHERE (home.team_long_name = 'FC Barcelona' AND away.team_long_name = 'Real Madrid CF')
-       OR (home.team_long_name = 'Real Madrid CF' AND away.team_long_name = 'FC Barcelona')
-)
-SELECT
-    COUNT(*)                                                              AS total_clasicos,
-    COUNT(*) FILTER (WHERE ganador = 'FC Barcelona')                      AS victorias_barca,
-    COUNT(*) FILTER (WHERE ganador = 'Real Madrid CF')                    AS victorias_madrid,
-    COUNT(*) FILTER (WHERE ganador = 'Empate')                            AS empates,
-    SUM(home_team_goal + away_team_goal)                                  AS goles_totales,
-    ROUND(AVG(home_team_goal + away_team_goal)::numeric, 2)               AS goles_por_clasico,
-    SUM(CASE WHEN local = 'FC Barcelona' THEN home_team_goal ELSE away_team_goal END) AS goles_barca,
-    SUM(CASE WHEN local = 'Real Madrid CF' THEN home_team_goal ELSE away_team_goal END) AS goles_madrid
-FROM clasicos;
+
 */
